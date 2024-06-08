@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class Geo extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -16,10 +18,7 @@ class Hotel extends Model
      */
     protected $fillable = [
         'code',
-        'geo_id',
-        'data',
-        'data_detail',
-        'data_detail_en',
+        'name',
         'crawl_status'
     ];
 }

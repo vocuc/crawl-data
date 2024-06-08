@@ -17,41 +17,48 @@
 
 </head>
 <body class="antialiased">
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">khách sạn</th>
-        <th>Giá</th>
-        <th scope="col">region</th>
-        <th scope="col">Rate</th>
-        <th scope="col">Sao</th>
-        <th scope="col">Tag</th>
-        <th>Ảnh</th>
-    </tr>
-    </thead>
-    <tbody>
+<div style="width: 600px;margin: auto">
     @foreach($hotels as $hotel)
-        <?php $data = json_decode($hotel->data, true);?>
-        <tr>
-            <th>{{$data["name"]}}</th>
-            <th>{{number_format($data["hotelInventorySummary"]["cheapestRateDisplay"]["baseFare"]["amount"], 0, ",", ".") }} VNĐ</th>
-            <td>{{$data["region"]}}</td>
-            <td>{{$data["userRating"]}}({{$data["numReviews"]}} Đánh giá) {{$data["userRatingInfo"]}}</td>
-            <td>{{$data["starRating"]}}</td>
-            <td>
-                @foreach($data["hotelFeatures"] as $tag)
-                    <div style="margin-right: 10px">{{$tag["text"]}}</div>
+        <?php
+        if (request()->get('l') == "en") {
+            $data = json_decode($hotel->data_detail_en, true);
+        } else {
+            $data = json_decode($hotel->data_detail, true);
+        }
+        ?>
+        <?php $hotel = json_decode($hotel->data, true); ?>
+        <div style="margin-bottom: 50px">
+            <div>
+                <b>Tên khách sạn: </b>{{$data["data"]["name"]}}
+            </div>
+            <div><b>Địa chỉ: </b>{{$data["data"]["address"]}}</div>
+            <div><b>Giá: </b>
+                {{number_format($hotel["hotelInventorySummary"]["cheapestRateDisplay"]["baseFare"]["amount"], 0, ",", ".") }} VNĐ
+            </div>
+            <div><b>Vị trí: </b>{{$data["data"]["hotelGEO"]["longitude"]}} - {{$data["data"]["hotelGEO"]["latitude"]}}</div>
+            <div><b>Dánh giá: </b>{{$data["data"]["starRating"]}}</div>
+            <div><b>Sao: </b>{{$hotel["userRating"]}} - {{$data["data"]["userRatingInfo"]}} - (Từ {{$hotel["numReviews"]}} Đánh giá)</div>
+            <div>
+                <b>Tiện ích: </b>
+                @foreach($data["data"]["hotelFacilitiesTagDisplay"] as $facilities)
+                    <span style="margin-right: 10px">{{$facilities["name"]}}</span>
                 @endforeach
-            </td>
-            <td>
-                @foreach($data["imageUrls"] as $img)
-                    <?php $img = explode("?", $img); ?>
-                    <img src="{{$img[0]}}?src=imagekit&amp;tr=dpr-3,c-at_max,h-168,q-40,w-968" width="50px">
+            </div>
+            <div>
+                <div>
+                    <b>Mô tả: </b> {!! $data["data"]["attribute"]["overview"] !!}
+                </div>
+                @foreach($data["data"]["assets"] as $img)
+                    <img src="{{$img["url"]}}" width="50px">
                 @endforeach
-            </td>
-        </tr>
+            </div>
+        </div>
     @endforeach
-    </tbody>
-</table>
+    <div style="text-align: right; margin-top: 20px;float: right">
+        {{$hotels->links()}}
+    </div>
+    <div style="clear: right"></div>
+</div>
+
 </body>
 </html>
