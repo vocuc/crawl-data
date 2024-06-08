@@ -43,5 +43,3 @@ USER www
 EXPOSE 8000
 
 CMD ["php-fpm"]
-
-ENTRYPOINT ["start-container"]
