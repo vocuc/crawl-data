@@ -13,8 +13,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
-    environment:
-      CONTAINER_ROLE: app
     networks:
       - crawl-app
   scheduler:
