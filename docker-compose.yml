@@ -3,6 +3,9 @@ version: "3.7"
 services:
   app:
     build:
+      args:
+        user: quanbt
+        uid: 1000
       context: ./docker/app
       dockerfile: Dockerfile
     container_name: crawl-data-app

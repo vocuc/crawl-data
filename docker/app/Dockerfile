@@ -1,6 +1,8 @@
 FROM php:8.1-fpm
 
 ARG NODE_VERSION=20
+ARG user
+ARG uid
 
 ENV TZ=UTC
 
@@ -26,6 +28,11 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
 # Copy existing application directory contents
 COPY . /var/www/html
