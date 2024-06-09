@@ -18,6 +18,12 @@ services:
     networks:
       - crawl-app
   scheduler:
+    build:
+      args:
+        user: quanbt
+        uid: 1000
+      context: ./docker/app
+      dockerfile: Dockerfile
     container_name: laravel-scheduler
     depends_on:
       - app
