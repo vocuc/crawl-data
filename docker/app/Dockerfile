@@ -35,7 +35,7 @@ RUN mkdir -p /home/$user/.composer && \
 # Copy existing application directory contents
 COPY . /var/www/html
 
-COPY docker/start.sh /usr/local/bin/start
+COPY ./docker/start.sh /usr/local/bin/start
 
 WORKDIR /var/www/html
 
