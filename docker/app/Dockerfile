@@ -36,7 +36,7 @@ COPY . /var/www/html
 
 ADD . /var/www/html
 
-RUN chown -R www-data:www-data /var/www
+RUN chown -R www-data:www-data /var/www/html/storage/logs
 
 EXPOSE 9000
 
