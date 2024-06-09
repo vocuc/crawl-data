@@ -6,8 +6,6 @@ ARG uid
 
 ENV TZ=UTC
 
-WORKDIR /var/www/html
-
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install dependencies
@@ -36,6 +34,10 @@ RUN mkdir -p /home/$user/.composer && \
 
 # Copy existing application directory contents
 COPY . /var/www/html
+
+WORKDIR /var/www/html
+
+USER $user
 
 EXPOSE 9000
 
