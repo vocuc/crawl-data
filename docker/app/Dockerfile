@@ -34,13 +34,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Copy existing application directory permissions
-# COPY --chown=www:www . /var/www/html
+RUN composer install
 
-# Change current user to www
-# USER www
-WORKDIR /var/www/html
+RUN chown -R www-data:www-data /var/www/storage
 
-EXPOSE 9000
+RUN chown -R www-data:www-data /var/www/bootstrap/cache
+
+RUN php artisan cache:clear
+
+RUN php artisan optimize
 
 CMD ["php-fpm"]
