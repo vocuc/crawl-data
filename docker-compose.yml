@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   app:
+    image: craw-data-image
     build:
       args:
         user: quanbt
@@ -13,9 +14,20 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
+    environment:
+      CONTAINER_ROLE: app
     networks:
       - crawl-app
-  
+  scheduler:
+    image: craw-data-image
+    container_name: laravel-scheduler
+    depends_on:
+      - app
+    volumes:
+      - .:/var/www/html
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: scheduler
   db:
     image: mysql:8.0
     container_name: crawl-app-db
