@@ -34,6 +34,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . /var/www/html
 
+ADD . /var/www/html
+
+RUN chown -R www-data:www-data /var/www
+
 EXPOSE 9000
 
 CMD ["php-fpm"]
