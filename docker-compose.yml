@@ -18,16 +18,16 @@ services:
       CONTAINER_ROLE: app
     networks:
       - crawl-app
-  scheduler:
-    image: craw-data-image
-    container_name: laravel-scheduler
-    depends_on:
-      - app
-    volumes:
-      - .:/var/www/html
-    environment:
-      APP_ENV: local
-      CONTAINER_ROLE: scheduler
+  # scheduler:
+  #   image: craw-data-image
+  #   container_name: laravel-scheduler
+  #   depends_on:
+  #     - app
+  #   volumes:
+  #     - .:/var/www/html
+  #   environment:
+  #     APP_ENV: local
+  #     CONTAINER_ROLE: scheduler
   db:
     image: mysql:8.0
     container_name: crawl-app-db
