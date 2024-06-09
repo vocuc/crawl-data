@@ -2,7 +2,6 @@ version: "3.7"
 
 services:
   app:
-    image: craw-data-image
     build:
       args:
         user: quanbt
