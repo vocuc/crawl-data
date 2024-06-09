@@ -15,21 +15,21 @@ services:
       - ./:/var/www/html
     networks:
       - crawl-app
-  scheduler:
-    build:
-      args:
-        user: quanbt
-        uid: 1000
-      context: ./docker/app
-      dockerfile: Dockerfile
-    container_name: laravel-scheduler
-    depends_on:
-      - app
-    volumes:
-      - .:/var/www/html
-    environment:
-      APP_ENV: local
-      CONTAINER_ROLE: scheduler
+  # scheduler:
+  #   build:
+  #     args:
+  #       user: quanbt
+  #       uid: 1000
+  #     context: ./docker/app
+  #     dockerfile: Dockerfile
+  #   container_name: laravel-scheduler
+  #   depends_on:
+  #     - app
+  #   volumes:
+  #     - .:/var/www/html
+  #   environment:
+  #     APP_ENV: local
+  #     CONTAINER_ROLE: scheduler
   db:
     image: mysql:8.0
     container_name: crawl-app-db
