@@ -35,7 +35,7 @@ RUN mkdir -p /home/$user/.composer && \
 # Copy existing application directory contents
 COPY . /var/www/html
 
-COPY start.sh /usr/local/bin/start
+# COPY start.sh /usr/local/bin/start
 
 WORKDIR /var/www/html
 
@@ -43,4 +43,4 @@ USER $user
 
 EXPOSE 9000
 
-CMD ["php-fpm", "/usr/local/bin/start"]
+CMD ["php-fpm"]
