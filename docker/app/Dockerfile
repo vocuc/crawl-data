@@ -34,8 +34,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy existing application directory contents
 COPY . /var/www/html
 
-RUN composer install
-
 RUN chown -R www-data:www-data /var/www/storage
 
 RUN chown -R www-data:www-data /var/www/bootstrap/cache
