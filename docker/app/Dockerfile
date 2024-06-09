@@ -35,10 +35,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY . /var/www/html
 
 # Copy existing application directory permissions
-COPY --chown=www:www . /var/www/html
+# COPY --chown=www:www . /var/www/html
 
 # Change current user to www
 # USER www
+WORKDIR /var/www/html
 
 EXPOSE 9000
 
