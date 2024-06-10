@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-         $schedule->command('app:crawl-data')->everyTenMinutes()->withoutOverlapping();
+         $schedule->command('app:crawl-data')->everyMinute()->withoutOverlapping();
          $schedule->command('app:crawl-data-detail')->everyFifteenMinutes()->withoutOverlapping();
     }
 
