@@ -15,21 +15,6 @@ services:
       - ./:/var/www/html
     networks:
       - crawl-app
-  # scheduler:
-  #   build:
-  #     args:
-  #       user: quanbt
-  #       uid: 1000
-  #     context: ./docker/app
-  #     dockerfile: Dockerfile
-  #   container_name: laravel-scheduler
-  #   depends_on:
-  #     - app
-  #   volumes:
-  #     - .:/var/www/html
-  #   environment:
-  #     APP_ENV: local
-  #     CONTAINER_ROLE: scheduler
   db:
     image: mysql:8.0
     container_name: crawl-app-db
@@ -44,7 +29,6 @@ services:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
       - crawl-app
-
   nginx:
     image: nginx:1.17-alpine
     container_name: crawl-data-nginx
