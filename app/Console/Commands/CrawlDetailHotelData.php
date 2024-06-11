@@ -32,7 +32,7 @@ class CrawlDetailHotelData extends Command
 
         $hotel->data_detail = $this->crawlDetailHotel($hotel->code);
 
-        sleep(rand(10, 60));
+        sleep(rand(10, 100));
 
         $hotel->data_detail_en = $this->crawlDetailHotelEn($hotel->code);
 
