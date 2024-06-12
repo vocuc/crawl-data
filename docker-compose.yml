@@ -27,6 +27,8 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    ports:
+      - 8001:3306
     networks:
       - crawl-app
   nginx:
