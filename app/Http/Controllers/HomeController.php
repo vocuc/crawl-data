@@ -35,7 +35,7 @@ class HomeController extends Controller
                     "longitude" => $vi["data"]["hotelGEO"]["longitude"],
                     "latitude" => $vi["data"]["hotelGEO"]["latitude"],
                     "starRating" => $vi["data"]["starRating"],
-                    "userRating" => $vi["userRating"],
+                    "userRating" => $data["userRating"],
                     "userRatingInfo" => $vi["data"]["userRatingInfo"],
                     "numReviews" => $data["numReviews"],
                     "hotelFacilitiesTagDisplay" => $vi["data"]["hotelFacilitiesTagDisplay"],
