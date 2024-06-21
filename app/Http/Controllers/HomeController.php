@@ -42,7 +42,20 @@ class HomeController extends Controller
                     "overview" => $vi["data"]["attribute"]["overview"],
                     "assets" => $vi["data"]["assets"]
                 ],
-                "en" => []
+                "en" => [
+                    "name" => $en["data"]["name"],
+                    "address" => $en["data"]["address"],
+                    "price" => $data["hotelInventorySummary"]["cheapestRateDisplay"]["baseFare"]["amount"],
+                    "longitude" => $en["data"]["hotelGEO"]["longitude"],
+                    "latitude" => $en["data"]["hotelGEO"]["latitude"],
+                    "starRating" => $en["data"]["starRating"],
+                    "userRating" => $data["userRating"],
+                    "userRatingInfo" => $en["data"]["userRatingInfo"],
+                    "numReviews" => $data["numReviews"],
+                    "hotelFacilitiesTagDisplay" => $en["data"]["hotelFacilitiesTagDisplay"],
+                    "overview" => $en["data"]["attribute"]["overview"],
+                    "assets" => $en["data"]["assets"]
+                ]
             ];
         }
 
