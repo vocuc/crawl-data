@@ -5,16 +5,48 @@ namespace App\Http\Controllers;
 use App\Models\Geo;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class HomeController extends Controller
 {
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index() {
-        $hotels = Hotel::where("crawl_status", 1)->paginate(1);
+    public function index(Request $request)
+    {
+        $query = Hotel::where("crawl_status", 1);
 
-        return view("welcome")->with("hotels", $hotels);
+        if ($request->has("geo_id")) {
+            $query = $query->where("geo_id", $request->get("geo_id"));
+        }
+
+        $aryHotels = [];
+
+        foreach ($query->get()->toArray() as $hotel) {
+            $data = json_decode($hotel->data, true);
+            $en = json_decode($hotel->data_detail_en, true);
+            $vi = json_decode($hotel->data_detail, true);
+            $aryHotels[] = [
+                "vi" => [
+                    "name" => $vi["data"]["name"],
+                    "address" => $vi["data"]["address"],
+                    "price" => $data["hotelInventorySummary"]["cheapestRateDisplay"]["baseFare"]["amount"],
+                    "longitude" => $vi["data"]["hotelGEO"]["longitude"],
+                    "latitude" => $vi["data"]["hotelGEO"]["latitude"],
+                    "starRating" => $vi["data"]["starRating"],
+                    "userRating" => $vi["userRating"],
+                    "userRatingInfo" => $vi["data"]["userRatingInfo"],
+                    "numReviews" => $data["numReviews"],
+                    "hotelFacilitiesTagDisplay" => $vi["data"]["hotelFacilitiesTagDisplay"],
+                    "overview" => $vi["data"]["attribute"]["overview"],
+                    "assets" => $data["data"]["assets"]
+                ],
+                "en" => []
+            ];
+        }
+
+        return Response::json($aryHotels, 200);
     }
 
     /**
@@ -38,7 +70,7 @@ class HomeController extends Controller
             "name" => $request->get("name")
         ]);
 
-        return redirect()->back()->with("success","Thêm mới thành công");
+        return redirect()->back()->with("success", "Thêm mới thành công");
     }
 
     /**
