@@ -40,7 +40,7 @@ class HomeController extends Controller
                     "numReviews" => $data["numReviews"],
                     "hotelFacilitiesTagDisplay" => $vi["data"]["hotelFacilitiesTagDisplay"],
                     "overview" => $vi["data"]["attribute"]["overview"],
-                    "assets" => $data["data"]["assets"]
+                    "assets" => $vi["data"]["assets"]
                 ],
                 "en" => []
             ];
