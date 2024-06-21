@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         $aryHotels = [];
 
-        foreach ($query->get()->toArray() as $hotel) {
+        foreach ($query->get() as $hotel) {
             $data = json_decode($hotel->data, true);
             $en = json_decode($hotel->data_detail_en, true);
             $vi = json_decode($hotel->data_detail, true);
