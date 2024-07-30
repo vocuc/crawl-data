@@ -73,6 +73,14 @@ class HomeController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function cities()
+    {
+        return  Response::json(Geo::all(), 200);
+    }
+
+    /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */

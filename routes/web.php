@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, "index"]);
+Route::get('/cities', [\App\Http\Controllers\HomeController::class, "cities"]);
 Route::get('/configs', [\App\Http\Controllers\HomeController::class, "config"]);
 Route::post('/configs', [\App\Http\Controllers\HomeController::class, "postConfig"])->name("configs");
 Route::get('/geos/{code}', [\App\Http\Controllers\HomeController::class, "deleteGeo"])->name("deleteGeo");
